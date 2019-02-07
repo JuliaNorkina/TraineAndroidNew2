@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             super.onPostExecute(integer);
             MainActivity activity = activityReference.get();
             if (activity == null) return;
-            activity.tv.setText(integer);
+            activity.tv.setText(String.valueOf(integer));
         }
     }
 
