@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/factasynctask" />
             <option value="$PROJECT_DIR$/factrunable" />
           </set>
         </option>

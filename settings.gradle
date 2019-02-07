@@ -1,1 +1,1 @@
-include ':app', ':factrunable'
+include ':app', ':factrunable', ':factasynctask'
