@@ -51,6 +51,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         Log.d("MyLog", "count of threads: " + Thread.activeCount());
     }
 
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("result", Integer.parseInt(tv.getText().toString()));
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        tv.setText(String.valueOf(savedInstanceState.getInt("result")));
+    }
+
     private static class MyHandler extends Handler{
         private WeakReference<MainActivity> activityReference;
 
