@@ -2,10 +2,8 @@ package com.example.factasynctask;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,6 +13,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private EditText editText;
     private TextView tv;
+    private MyAsyncTask myAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +23,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
         editText = findViewById(R.id.editText);
         tv = findViewById(R.id.tv);
         findViewById(R.id.bOk).setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.bOk:
-                MyAsyncTask myAsyncTask = new MyAsyncTask(this);
+                myAsyncTask = new MyAsyncTask(this);
                 myAsyncTask.execute(Integer.parseInt(editText.getText().toString()));
         }
-
     }
 
-    private static class MyAsyncTask extends AsyncTask<Integer,Void,Integer> {
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("result", Integer.parseInt(tv.getText().toString()));
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        tv.setText(String.valueOf(savedInstanceState.getInt("result")));
+    }
+
+    private static class MyAsyncTask extends AsyncTask<Integer, Void, Integer> {
 
         private WeakReference<MainActivity> activityReference;
 
@@ -53,7 +60,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
             int fact = 1;
-            for(int count = integers[0]; count > 1; count--) {
+            for (int count = integers[0]; count > 1; count--) {
                 fact = fact * count;
             }
             return fact;
